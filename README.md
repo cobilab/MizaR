@@ -10,7 +10,7 @@ lzma -d VDB_MT_ALL_REF.fa.lzma
 ```
 For compressing a metagenomic FASTQ file:
 ```
-./Mizar --reads reads.fq --database VDB.mfa \        
+./Mizar --reads reads.fq --database VDB_MT_ALL_REF.fa \        
  --output compressed_reads.fq.mr --threads 8
 ```
 To run coverage and sequences experiments:
