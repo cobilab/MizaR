@@ -230,8 +230,8 @@ if [[ "$RUN" -eq "1" ]];
 	  echo -e "\e[34m[MizaR]\e[32m All reads already in buckets ...\e[0m";
           break;
           else
-          ./MAGNET --threads 8 --verbose --force --level 7 --similarity 0.4 \
-	  -o mizar-bucket-$IDX.fq -2 mizar-unfiltered.fq \
+          ./MAGNET --threads $THREADS --verbose --force --level 7 \
+	  --similarity 0.4 -o mizar-bucket-$IDX.fq -2 mizar-unfiltered.fq \
 	  mizar-ref.fa mizar-tmp-reads.fq
           mv mizar-unfiltered.fq mizar-tmp-reads.fq
 	  fi
