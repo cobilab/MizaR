@@ -3,7 +3,7 @@
 # INSTALLATION DEPENDENCIES:
 #
 # sudo apt-get install libopenblas-base
-# conda install -c 'bioconda' art
+# apt-get install art-nextgen-simulation-tools
 #
 DATABASE="$1";
 SIZE="$2";
@@ -27,7 +27,6 @@ art_illumina -rs 0 -ss HS25 -i sample.fa -p -l 150 -f $DEPTH -m 200 -s 10 -o rea
 #
 rm -f GIS.txt;
 #
-# XXX: Adapt
 cat reads1.fq reads2.fq > merged_reads.fq
 #
 # ============================================================================
