@@ -5,7 +5,7 @@ DB="VDB_MT_ALL_REF.fa";
 ./MizaR.sh --install
 #
 rm -f sequences.txt
-for(( x = 500 ; x <= 5000 ; x += 500 ));
+for(( x = 100 ; x <= 1000 ; x += 100 ));
   do
   #
  ./Simulate.sh $DB $x 50
@@ -21,10 +21,10 @@ for(( x = 500 ; x <= 5000 ; x += 500 ));
   B_BASES_SORTED=`cat report_sorted.txt | grep Bases | awk '{ print $4; }'`;
   B_QUALS_SORTED=`cat report_sorted.txt | grep Quals | awk '{ print $4; }'`;
   B_PERMUTATION=`cat report_permutations.txt | awk '{ print $1; }'`; 
-  B_TOTAL_ORIGINAL=`ls -la compressed.mr | awk '{ print $5; }'`;
-  B_TOTAL_SORTED=`ls -la merged_reads.fq | awk '{ print $5; }'`;
+  B_TOTAL_ORIGINAL=`ls -la compressed.mr.fqz | awk '{ print $5; }'`;
+  B_TOTAL_SORTED=`ls -la merged_reads.fq.fqz | awk '{ print $5; }'`;
   #
-  echo "$B_NAMES_ORIGINAL $B_BASES_ORIGINAL $B_QUALS_ORIGINAL $B_NAMES_SORTED $B_BASES_SORTED $B_QUALS_SORTED $B_PERMUTATION $B_TOTAL_ORIGINAL $B_TOTAL_SORTED" >> sequences.txt
+  printf "$x\t$B_NAMES_ORIGINAL\t$B_BASES_ORIGINAL\t$B_QUALS_ORIGINAL\t$B_NAMES_SORTED\t$B_BASES_SORTED\t$B_QUALS_SORTED\t$B_PERMUTATION\t$B_TOTAL_ORIGINAL\t$B_TOTAL_SORTED\n" >> sequences.txt
   #
   done
 #
@@ -47,10 +47,10 @@ for(( x = 1 ; x <= 100 ; x += 10 ));
   B_BASES_SORTED=`cat report_sorted.txt | grep Bases | awk '{ print $4; }'`;
   B_QUALS_SORTED=`cat report_sorted.txt | grep Quals | awk '{ print $4; }'`;
   B_PERMUTATION=`cat report_permutations.txt | awk '{ print $1; }'`;
-  B_TOTAL_ORIGINAL=`ls -la compressed.mr | awk '{ print $5; }'`;
-  B_TOTAL_SORTED=`ls -la merged_reads.fq | awk '{ print $5; }'`;
+  B_TOTAL_ORIGINAL=`ls -la compressed.mr.fqz | awk '{ print $5; }'`;
+  B_TOTAL_SORTED=`ls -la merged_reads.fq.fqz | awk '{ print $5; }'`;
   #
-  echo "$B_NAMES_ORIGINAL $B_BASES_ORIGINAL $B_QUALS_ORIGINAL $B_NAMES_SORTED $B_BASES_SORTED $B_QUALS_SORTED $B_PERMUTATION $B_TOTAL_ORIGINAL $B_TOTAL_SORTED" >> coverage.txt
+  printf "$x\t$B_NAMES_ORIGINAL\t$B_BASES_ORIGINAL\t$B_QUALS_ORIGINAL\t$B_NAMES_SORTED\t$B_BASES_SORTED\t$B_QUALS_SORTED\t$B_PERMUTATION\t$B_TOTAL_ORIGINAL\t$B_TOTAL_SORTED\n" >> coverage.txt
   #
   done
 #
