@@ -250,7 +250,7 @@ if [[ "$RUN" -eq "1" ]];
   ./fqzcomp -n 1 -s 1 -q 1 $OUTPUT $OUTPUT.fqz 2> report_sorted.txt
   #
   NLINES=`wc -l $READS | awk '{ print $1; }'`;
-  echo "scale=2; (($NLINES * l($NLINES/4)/l(10)) - ($NLINES * 1.442695))/8" \
+  echo "scale=2; ((($NLINES/4) * l($NLINES/4)/l(10)) - (($NLINES/4) * 1.442695))/8" \
   | bc -l > report_permutations.txt
   cat report_permutations.txt
   # 
