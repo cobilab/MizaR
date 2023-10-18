@@ -207,6 +207,7 @@ if [[ "$RUN" -eq "1" ]];
   IDX=0;
   cp $READS mizar-tmp-reads.fq;
   #
+  rm -f mizar-bucket-*.fq;
   mapfile -t GIS_DATA < mizar-top.csv;
   for vline in "${GIS_DATA[@]}"
     do
@@ -227,13 +228,14 @@ if [[ "$RUN" -eq "1" ]];
         gto_fasta_extract_read_by_pattern -p "$GID" < $DATABASE > mizar-ref.fa;
         #
         FSIZE=`ls -la mizar-tmp-reads.fq | awk '{ print $5; }'`;
-        if (( $(bc <<<"$FSIZE < 1 ") )); 
+        #
+	if (( $(bc <<<"$FSIZE < 1 ") )); 
 	  then
 	  echo -e "\e[34m[MizaR]\e[32m All reads already in buckets ...\e[0m";
           break;
           else
           ./MAGNET --threads $THREADS --verbose --force --level 7 \
-	  --similarity 0.4 -o mizar-bucket-$IDX.fq -2 mizar-unfiltered.fq \
+	  --similarity 0.5 -o mizar-bucket-$IDX.fq -2 mizar-unfiltered.fq \
 	  mizar-ref.fa mizar-tmp-reads.fq
           mv mizar-unfiltered.fq mizar-tmp-reads.fq
 	  fi

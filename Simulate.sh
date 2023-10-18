@@ -23,6 +23,7 @@ for vline in "${GIS_DATA[@]}"
   rm -f sim-$GI.fa;
   done
 #
+rm -f sample.fa;
 ./gto_fasta_rand_extra_chars < tmp-sample.fa > sample.fa
 #
 art_illumina -rs 0 -ss HS25 -i sample.fa -p -l 150 -f $DEPTH -m 200 -s 10 -o reads
