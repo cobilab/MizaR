@@ -1,6 +1,7 @@
 #!/bin/bash
 #
 DB="VDB_MT_ALL_REF.fa";
+CACHE="50";
 #
 ./MizaR.sh --install
 #
@@ -11,7 +12,7 @@ for(( x = 100 ; x <= 1000 ; x += 100 ));
  ./Simulate.sh $DB $x 50
   #
   ./MizaR.sh --reads merged_reads.fq \
-  --database $DB --cache 25 \
+  --database $DB --cache $CACHE \
   --similarity 50 --output compressed.mr
   #
   B_NAMES_ORIGINAL=`cat report_original.txt | grep Names | awk '{ print $4; }'`;
@@ -38,7 +39,7 @@ for(( x = 1 ; x <= 100 ; x += 10 ));
   ./Simulate.sh VDB_MT_ALL_REF.fa 500 $x
   #
   ./MizaR.sh --reads merged_reads.fq \
-  --database $DB --cache 25 \
+  --database $DB --cache $CACHE \
   --similarity 50 --output compressed.mr
   #
   B_NAMES_ORIGINAL=`cat report_original.txt | grep Names | awk '{ print $4; }'`;

@@ -174,6 +174,7 @@ if [[ "$INSTALL" -eq "1" ]];
   make
   cd ../bin/
   cp gto_fasta_extract_read_by_pattern ../../
+  cp gto_fasta_rand_extra_chars ../../
   cd ../../
   #
   echo -e "\e[34m[MizaR]\e[32m Installing fqzcomp ...\e[0m";
