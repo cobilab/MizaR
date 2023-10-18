@@ -72,6 +72,7 @@ CHECK_PROGRAMS () {
   PROGRAM_EXISTS "./FALCON";
   PROGRAM_EXISTS "./MAGNET";
   PROGRAM_EXISTS "./gto_fasta_extract_read_by_pattern";
+  PROGRAM_EXISTS "./gto_fasta_rand_extra_chars";
   PROGRAM_EXISTS "./fqzcomp";
   }
 #
@@ -167,10 +168,10 @@ if [[ "$INSTALL" -eq "1" ]];
   cd ../../
   #
   echo -e "\e[34m[MizaR]\e[32m Installing GTO ...\e[0m";
-  rm -fr 1.6.2.zip gto-1.6.2
-  wget https://github.com/cobilab/gto/archive/refs/tags/1.6.2.zip
-  unzip 1.6.2.zip
-  cd gto-1.6.2/src/
+  rm -fr v1.6.3.zip gto-1.6.3
+  wget https://github.com/cobilab/gto/archive/refs/tags/v1.6.3.zip
+  unzip v1.6.3.zip
+  cd gto-1.6.3/src/
   make
   cd ../bin/
   cp gto_fasta_extract_read_by_pattern ../../
