@@ -295,7 +295,7 @@ if [[ "$RUN" -eq "1" ]];
   #
   if [[ "$RUN_FQZ" -eq "1" ]];
     then
-    ./fqzcomp -n 1 -s 1 -q 1 $READS $READS-ORIGINAL.fqz 2> report_original_fqz.txt 
+    ./fqzcomp -n 1 -s 1 -q 1 $READS $READS.fqz 2> report_original_fqz.txt 
     ./fqzcomp -n 1 -s 1 -q 1 $OUTPUT $OUTPUT.fqz 2> report_sorted_fqz.txt
     fi
   #

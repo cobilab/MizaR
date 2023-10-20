@@ -25,15 +25,15 @@ for(( x = 100 ; x <= 1000 ; x += 100 ));
   B_BASES_SORTED_FQZ=`cat report_sorted_fqz.txt | grep Bases | awk '{ print $4; }'`;
   B_QUALS_SORTED_FQZ=`cat report_sorted_fqz.txt | grep Quals | awk '{ print $4; }'`;
   #
-  B_TOTAL_ORIGINAL_LZMA=`ls -la merged_reads.fq-ORIGINAL.xz | awk '{ print $5; }'`;
+  B_TOTAL_ORIGINAL_LZMA=`ls -la merged_reads.fq.xz | awk '{ print $5; }'`;
   B_TOTAL_SORTED_LZMA=`ls -la compressed.mr.xz | awk '{ print $5; }'`;
   B_TOTAL_SORTED_PERMUTATION=`echo "$B_TOTAL_SORTED_LZMA + $B_PERMUTATION" | bc -l`;  
   #
-  B_TOTAL_ORIGINAL_JARVIS=`ls -la merged_reads.fq-ORIGINAL.tar | awk '{ print $5; }'`;
+  B_TOTAL_ORIGINAL_JARVIS=`ls -la merged_reads.fq.tar | awk '{ print $5; }'`;
   B_TOTAL_SORTED_JARVIS=`ls -la compressed.mr.tar | awk '{ print $5; }'`;
   B_TOTAL_SORTED_PERMUTATION=`echo "$B_TOTAL_SORTED_JARVIS + $B_PERMUTATION" | bc -l`;
   #
-  B_TOTAL_ORIGINAL_FQZ=`ls -la merged_reads.fq-ORIGINAL.fqz | awk '{ print $5; }'`;
+  B_TOTAL_ORIGINAL_FQZ=`ls -la merged_reads.fq.fqz | awk '{ print $5; }'`;
   B_TOTAL_SORTED_FQZ=`ls -la compressed.mr.fqz | awk '{ print $5; }'`;
   B_TOTAL_SORTED_PERMUTATION=`echo "$B_TOTAL_SORTED_FQZ + $B_PERMUTATION" | bc -l`;
   #
@@ -63,15 +63,15 @@ for(( x = 1 ; x <= 100 ; x += 10 ));
   B_BASES_SORTED_FQZ=`cat report_sorted_fqz.txt | grep Bases | awk '{ print $4; }'`;
   B_QUALS_SORTED_FQZ=`cat report_sorted_fqz.txt | grep Quals | awk '{ print $4; }'`;
   #
-  B_TOTAL_ORIGINAL_LZMA=`ls -la merged_reads.fq-ORIGINAL.xz | awk '{ print $5; }'`;
+  B_TOTAL_ORIGINAL_LZMA=`ls -la merged_reads.fq.xz | awk '{ print $5; }'`;
   B_TOTAL_SORTED_LZMA=`ls -la compressed.mr.xz | awk '{ print $5; }'`;
   B_TOTAL_SORTED_PERMUTATION=`echo "$B_TOTAL_SORTED_LZMA + $B_PERMUTATION" | bc -l`;
   #
-  B_TOTAL_ORIGINAL_JARVIS=`ls -la merged_reads.fq-ORIGINAL.tar | awk '{ print $5; }'`;
+  B_TOTAL_ORIGINAL_JARVIS=`ls -la merged_reads.fq.tar | awk '{ print $5; }'`;
   B_TOTAL_SORTED_JARVIS=`ls -la compressed.mr.tar | awk '{ print $5; }'`;
   B_TOTAL_SORTED_PERMUTATION=`echo "$B_TOTAL_SORTED_JARVIS + $B_PERMUTATION" | bc -l`;
   #
-  B_TOTAL_ORIGINAL_FQZ=`ls -la merged_reads.fq-ORIGINAL.fqz | awk '{ print $5; }'`;
+  B_TOTAL_ORIGINAL_FQZ=`ls -la merged_reads.fq.fqz | awk '{ print $5; }'`;
   B_TOTAL_SORTED_FQZ=`ls -la compressed.mr.fqz | awk '{ print $5; }'`;
   B_TOTAL_SORTED_PERMUTATION=`echo "$B_TOTAL_SORTED_FQZ + $B_PERMUTATION" | bc -l`;
   #
