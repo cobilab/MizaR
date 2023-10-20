@@ -1,6 +1,9 @@
 #!/bin/bash
 #
 RUN="0";
+RUN_FQZ="1";
+RUN_LZMA="0";
+RUN_JARVIS3="0";
 INSTALL="0";
 THREADS="8";
 CACHE="10";
@@ -27,13 +30,17 @@ SHOW_MENU () {
   echo " -t <INT>, --threads <INT>       Number of threads,       ";
   echo " -o <STR>, --output <STR>        Output file name,        ";
   echo "                                                          ";
+  echo " -f, --fqzcomp                   Run Fqzcomp compressor,  ";
+  echo " -l, --lzma                      Run lzma compressor,     ";
+  echo " -j, --jarvis                    Run JARVIS compressor,   ";
+  echo "                                                          ";
   echo " -r <STR>, --reads <STR>         FASTQ reads (input),     ";
   echo " -d <STR>, --database <STR>      FASTA Viral Database.    ";
   echo "                                                          ";
   echo " Example -----------------------------------------------  ";
   echo "                                                          ";
   echo " ./MizaR.sh --reads reads.fq --database VDB.mfa \\        ";
-  echo "   --output compressed_reads.fq.mr --threads 8            ";
+  echo " --output compressed_reads.fq.mr --fqzcomp --threads 8    ";
   echo "                                                          ";
   echo " -------------------------------------------------------  ";
   }
@@ -74,6 +81,8 @@ CHECK_PROGRAMS () {
   PROGRAM_EXISTS "./gto_fasta_extract_read_by_pattern";
   PROGRAM_EXISTS "./gto_fasta_rand_extra_chars";
   PROGRAM_EXISTS "./fqzcomp";
+  PROGRAM_EXISTS "./xz";
+  PROGRAM_EXISTS "./JARVIS3.sh";
   }
 #
 ################################################################################
@@ -119,6 +128,18 @@ while [[ $# -gt 0 ]]
       SIMILARITY="$2";
       SHOW_HELP=0;
       shift 2;
+    ;;
+    -f|--fqzcomp)
+      RUN_FQZCOMP=1;
+      shift
+    ;;
+    -l|--lzma)
+      RUN_LZMA=1;
+      shift
+    ;;
+    -j|--jarvis)
+      RUN_JARVIS=1;
+      shift
     ;;
     -o|--output)
       OUTPUT="$2";
@@ -187,6 +208,27 @@ if [[ "$INSTALL" -eq "1" ]];
   cp fqzcomp ../
   cd ../ 
   #
+  echo -e "\e[34m[MizaR]\e[32m Installing LZMA ...\e[0m";
+  wget https://github.com/tukaani-project/xz/archive/refs/tags/v5.4.4.zip
+  unzip v5.4.4.zip 
+  cd xz-5.4.4/
+  cmake .
+  make
+  cp xz ../
+  cd ..
+  #
+  echo -e "\e[34m[MizaR]\e[32m Installing JARVIS3 ...\e[0m";
+  rm -fr jarvis3-master extra
+  wget https://github.com/cobilab/jarvis3/archive/refs/tags/v3.3.zip
+  unzip v3.3.zip
+  cd jarvis3-3.3/src/
+  make
+  cp -rf extra/ ../../ 
+  cp -f JARVIS3.sh ../../ 
+  cp -f JARVIS3 ../../ 
+  cd ../../
+  ./JARVIS3.sh --install
+  #
   CHECK_PROGRAMS
   #
   fi
@@ -250,8 +292,23 @@ if [[ "$RUN" -eq "1" ]];
   cat mizar-bucket-*.fq mizar-tmp-reads.fq > $OUTPUT
   rm -f mizar-bucket-*.fq;
   #
-  ./fqzcomp -n 1 -s 1 -q 1 $READS $READS-ORIGINAL.fqz 2> report_original.txt 
-  ./fqzcomp -n 1 -s 1 -q 1 $OUTPUT $OUTPUT.fqz 2> report_sorted.txt
+  if [[ "$RUN_FQZ" -eq "1" ]];
+    then
+    ./fqzcomp -n 1 -s 1 -q 1 $READS $READS-ORIGINAL.fqz 2> report_original_fqz.txt 
+    ./fqzcomp -n 1 -s 1 -q 1 $OUTPUT $OUTPUT.fqz 2> report_sorted_fqz.txt
+    fi
+  #
+  if [[ "$RUN_LZMA" -eq "1" ]];
+    then
+    ./xz -9 --extreme $READS 2> report_original_lzma.txt
+    ./xz -9 --extreme $OUTPUT 2> report_sorted_lzma.txt
+    fi
+  #
+  if [[ "$RUN_JARVIS3" -eq "1" ]];
+    then
+    ./JARVI3.sh --fastq --block 250MB --threads 2 --level 17 --input $READS 2> report_original_jarvis3.txt
+    ./JARVI3.sh --fastq --block 250MB --threads 2 --level 17 --input $OUTPUT 2> report_sorted_jarvis3.txt
+    fi
   #
   NLINES=`wc -l $READS | awk '{ print $1; }'`;
   echo "scale=2; ((($NLINES/4) * l($NLINES/4)/l(10)) - (($NLINES/4) * 1.442695))/8" \
