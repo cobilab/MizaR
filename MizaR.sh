@@ -209,6 +209,7 @@ if [[ "$INSTALL" -eq "1" ]];
   cd ../ 
   #
   echo -e "\e[34m[MizaR]\e[32m Installing LZMA ...\e[0m";
+  rm -fr v5.4.4.zip xz-5.4.4/
   wget https://github.com/tukaani-project/xz/archive/refs/tags/v5.4.4.zip
   unzip v5.4.4.zip 
   cd xz-5.4.4/
@@ -218,7 +219,7 @@ if [[ "$INSTALL" -eq "1" ]];
   cd ..
   #
   echo -e "\e[34m[MizaR]\e[32m Installing JARVIS3 ...\e[0m";
-  rm -fr jarvis3-master extra
+  rm -fr jarvis3-3.3/ v3.3.zip extra
   wget https://github.com/cobilab/jarvis3/archive/refs/tags/v3.3.zip
   unzip v3.3.zip
   cd jarvis3-3.3/src/
