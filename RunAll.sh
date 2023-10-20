@@ -13,6 +13,7 @@ for(( x = 100 ; x <= 1000 ; x += 100 ));
   #
   ./MizaR.sh --reads merged_reads.fq \
   --database $DB --cache $CACHE \
+  --fqzcomp --lzma --jarvis \
   --similarity 50 --output compressed.mr
   #
   B_PERMUTATION=`cat report_permutations.txt | awk '{ print $1; }'`; 
@@ -50,6 +51,7 @@ for(( x = 1 ; x <= 100 ; x += 10 ));
   #
   ./MizaR.sh --reads merged_reads.fq \
   --database $DB --cache $CACHE \
+  --fqzcomp --lzma --jarvis \
   --similarity 50 --output compressed.mr
   #
   B_PERMUTATION=`cat report_permutations.txt | awk '{ print $1; }'`;
