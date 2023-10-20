@@ -3,7 +3,7 @@
 RUN="0";
 RUN_FQZ="1";
 RUN_LZMA="0";
-RUN_JARVIS3="0";
+RUN_JARVIS="0";
 INSTALL="0";
 THREADS="8";
 CACHE="10";
@@ -305,7 +305,7 @@ if [[ "$RUN" -eq "1" ]];
     ./xz -9 --extreme $OUTPUT 2> report_sorted_lzma.txt
     fi
   #
-  if [[ "$RUN_JARVIS3" -eq "1" ]];
+  if [[ "$RUN_JARVIS" -eq "1" ]];
     then
     ./JARVI3.sh --fastq --block 250MB --threads 2 --level 17 --input $READS 2> report_original_jarvis3.txt
     ./JARVI3.sh --fastq --block 250MB --threads 2 --level 17 --input $OUTPUT 2> report_sorted_jarvis3.txt
