@@ -307,8 +307,8 @@ if [[ "$RUN" -eq "1" ]];
   #
   if [[ "$RUN_JARVIS" -eq "1" ]];
     then
-    ./JARVI3.sh --fastq --block 250MB --threads 2 --level 17 --input $READS 2> report_original_jarvis3.txt
-    ./JARVI3.sh --fastq --block 250MB --threads 2 --level 17 --input $OUTPUT 2> report_sorted_jarvis3.txt
+    ./JARVIS3.sh --fastq --block 250MB --threads 2 --level 17 --input $READS 2> report_original_jarvis.txt
+    ./JARVIS3.sh --fastq --block 250MB --threads 2 --level 17 --input $OUTPUT 2> report_sorted_jarvis.txt
     fi
   #
   NLINES=`wc -l $READS | awk '{ print $1; }'`;
