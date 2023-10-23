@@ -13,7 +13,7 @@ for(( x = 100 ; x <= 1000 ; x += 100 ));
   #
   ./MizaR.sh --reads merged_reads.fq \
   --database $DB --cache $CACHE \
-  --fqzcomp --lzma --jarvis \
+  --fqzcomp --lzma --jarvis --threads 8 \
   --similarity 50 --output compressed.mr
   #
   B_PERMUTATION=`cat report_permutations.txt | awk '{ print $1; }'`; 
@@ -27,17 +27,17 @@ for(( x = 100 ; x <= 1000 ; x += 100 ));
   #
   B_TOTAL_ORIGINAL_LZMA=`ls -la merged_reads.fq.xz | awk '{ print $5; }'`;
   B_TOTAL_SORTED_LZMA=`ls -la compressed.mr.xz | awk '{ print $5; }'`;
-  B_TOTAL_SORTED_PERMUTATION=`echo "$B_TOTAL_SORTED_LZMA + $B_PERMUTATION" | bc -l`;  
+  B_TOTAL_SORTED_PERMUTATION_LZMA=`echo "$B_TOTAL_SORTED_LZMA + $B_PERMUTATION" | bc -l`;  
   #
   B_TOTAL_ORIGINAL_JARVIS=`ls -la merged_reads.fq.tar | awk '{ print $5; }'`;
   B_TOTAL_SORTED_JARVIS=`ls -la compressed.mr.tar | awk '{ print $5; }'`;
-  B_TOTAL_SORTED_PERMUTATION=`echo "$B_TOTAL_SORTED_JARVIS + $B_PERMUTATION" | bc -l`;
+  B_TOTAL_SORTED_PERMUTATION_JARVIS=`echo "$B_TOTAL_SORTED_JARVIS + $B_PERMUTATION" | bc -l`;
   #
   B_TOTAL_ORIGINAL_FQZ=`ls -la merged_reads.fq.fqz | awk '{ print $5; }'`;
   B_TOTAL_SORTED_FQZ=`ls -la compressed.mr.fqz | awk '{ print $5; }'`;
-  B_TOTAL_SORTED_PERMUTATION=`echo "$B_TOTAL_SORTED_FQZ + $B_PERMUTATION" | bc -l`;
+  B_TOTAL_SORTED_PERMUTATION_FQZ=`echo "$B_TOTAL_SORTED_FQZ + $B_PERMUTATION" | bc -l`;
   #
-  printf "$x\t$B_NAMES_ORIGINAL_FQZ\t$B_BASES_ORIGINAL_FQZ\t$B_QUALS_ORIGINAL_FQZ\t$B_NAMES_SORTED_FQZ\t$B_BASES_SORTED_FQZ\t$B_QUALS_SORTED_FQZ\t$B_PERMUTATION\t$B_TOTAL_ORIGINAL\t$B_TOTAL_SORTED\t$B_TOTAL_SORTED_PERMUTATION\t$B_TOTAL_ORIGINAL_LZMA\t$B_TOTAL_SORTED_JARVIS\t$B_TOTAL_SORTED_PERMUTATION\t$B_TOTAL_ORIGINAL_FQZ\t$B_TOTAL_SORTED_FQZ\t$B_TOTAL_SORTED_PERMUTATION\n" >> sequences.txt
+  printf "$x\t$B_NAMES_ORIGINAL_FQZ\t$B_BASES_ORIGINAL_FQZ\t$B_QUALS_ORIGINAL_FQZ\t$B_NAMES_SORTED_FQZ\t$B_BASES_SORTED_FQZ\t$B_QUALS_SORTED_FQZ\t$B_PERMUTATION\t$B_TOTAL_ORIGINAL_FQZ\t$B_TOTAL_SORTED_FQZ\t$B_TOTAL_SORTED_PERMUTATION_FQZ\t$B_TOTAL_ORIGINAL_LZMA\t$B_TOTAL_SORTED_LZMA\t$B_TOTAL_SORTED_PERMUTATION_LZMA\t$B_TOTAL_ORIGINAL_JARVIS\t$B_TOTAL_SORTED_JARVIS\t$B_TOTAL_SORTED_PERMUTATION_JARVIS\n" >> sequences.txt
   #
   done
 #
@@ -51,7 +51,7 @@ for(( x = 1 ; x <= 100 ; x += 10 ));
   #
   ./MizaR.sh --reads merged_reads.fq \
   --database $DB --cache $CACHE \
-  --fqzcomp --lzma --jarvis \
+  --fqzcomp --lzma --jarvis --threads 8 \
   --similarity 50 --output compressed.mr
   #
   B_PERMUTATION=`cat report_permutations.txt | awk '{ print $1; }'`;
@@ -75,7 +75,7 @@ for(( x = 1 ; x <= 100 ; x += 10 ));
   B_TOTAL_SORTED_FQZ=`ls -la compressed.mr.fqz | awk '{ print $5; }'`;
   B_TOTAL_SORTED_PERMUTATION=`echo "$B_TOTAL_SORTED_FQZ + $B_PERMUTATION" | bc -l`;
   #
-  printf "$x\t$B_NAMES_ORIGINAL_FQZ\t$B_BASES_ORIGINAL_FQZ\t$B_QUALS_ORIGINAL_FQZ\t$B_NAMES_SORTED_FQZ\t$B_BASES_SORTED_FQZ\t$B_QUALS_SORTED_FQZ\t$B_PERMUTATION\t$B_TOTAL_ORIGINAL\t$B_TOTAL_SORTED\t$B_TOTAL_SORTED_PERMUTATION\t$B_TOTAL_ORIGINAL_LZMA\t$B_TOTAL_SORTED_JARVIS\t$B_TOTAL_SORTED_PERMUTATION\t$B_TOTAL_ORIGINAL_FQZ\t$B_TOTAL_SORTED_FQZ\t$B_TOTAL_SORTED_PERMUTATION\n" >> coverage.txt
+  printf "$x\t$B_NAMES_ORIGINAL_FQZ\t$B_BASES_ORIGINAL_FQZ\t$B_QUALS_ORIGINAL_FQZ\t$B_NAMES_SORTED_FQZ\t$B_BASES_SORTED_FQZ\t$B_QUALS_SORTED_FQZ\t$B_PERMUTATION\t$B_TOTAL_ORIGINAL_FQZ\t$B_TOTAL_SORTED_FQZ\t$B_TOTAL_SORTED_PERMUTATION_FQZ\t$B_TOTAL_ORIGINAL_LZMA\t$B_TOTAL_SORTED_LZMA\t$B_TOTAL_SORTED_PERMUTATION_LZMA\t$B_TOTAL_ORIGINAL_JARVIS\t$B_TOTAL_SORTED_JARVIS\t$B_TOTAL_SORTED_PERMUTATION_JARVIS\n" >> coverage.txt
   #
   done
 #
