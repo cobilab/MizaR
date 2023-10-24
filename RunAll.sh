@@ -48,7 +48,7 @@ rm -f coverage.txt
 for(( x = 1 ; x <= 100 ; x += 10 ));
   do
   #
-  ./Simulate.sh VDB_MT_ALL_REF.fa 500 $x
+  ./Simulate.sh $DB 500 $x
   #
   ./MizaR.sh --reads merged_reads.fq \
   --database $DB --cache $CACHE \
