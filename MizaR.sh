@@ -9,6 +9,7 @@ THREADS="8";
 CACHE="10";
 READS="";
 DATABASE="VDB.mfa";
+SIMILARITY_READS="0.5";
 #
 ################################################################################
 #
@@ -17,7 +18,7 @@ SHOW_MENU () {
   echo "                                                          ";
   echo "                        MizaR                             ";
   echo "                                                          ";
-  echo "  Metagenomic information zone arrangement Encoder V1.0   ";
+  echo " Metagenomic information zone arrangement Encoder V1.0    ";
   echo "                                                          ";
   echo " Program options ---------------------------------------- ";
   echo "                                                          ";
@@ -25,6 +26,7 @@ SHOW_MENU () {
   echo " -i, --install                   Installation,            ";
   echo "                                                          ";
   echo " -s <INT>, --similarity <INT>    Minimum similarity,      ";
+  echo " -y <DBL>, --sim-reads <DBL>     Reads similarity,        ";
   echo " -c <INT>, --cache <INT>         Cache memory (max),      ";
   echo "                                 creating buckets,        ";
   echo " -t <INT>, --threads <INT>       Number of threads,       ";
@@ -127,6 +129,10 @@ while [[ $# -gt 0 ]]
     -s|--similarity)
       SIMILARITY="$2";
       SHOW_HELP=0;
+      shift 2;
+    ;;
+    -y|--sim-reads)
+      SIMILARITY_READS="$2";
       shift 2;
     ;;
     -f|--fqzcomp)
@@ -278,8 +284,8 @@ if [[ "$RUN" -eq "1" ]];
           break;
           else
           ./MAGNET --threads $THREADS --verbose --force --level 7 \
-	  --similarity 0.5 -o mizar-bucket-$IDX.fq -2 mizar-unfiltered.fq \
-	  mizar-ref.fa mizar-tmp-reads.fq
+	  --similarity $SIMILARITY_READS -o mizar-bucket-$IDX.fq \
+	  -2 mizar-unfiltered.fq mizar-ref.fa mizar-tmp-reads.fq
           mv mizar-unfiltered.fq mizar-tmp-reads.fq
 	  fi
         #
@@ -301,8 +307,8 @@ if [[ "$RUN" -eq "1" ]];
   #
   if [[ "$RUN_LZMA" -eq "1" ]];
     then
-    ./xz -9 --extreme $READS 2> report_original_lzma.txt
-    ./xz -9 --extreme $OUTPUT 2> report_sorted_lzma.txt
+    ./xz -f -k -9 --extreme $READS 2> report_original_lzma.txt
+    ./xz -f -k -9 --extreme $OUTPUT 2> report_sorted_lzma.txt
     fi
   #
   if [[ "$RUN_JARVIS" -eq "1" ]];
@@ -312,7 +318,7 @@ if [[ "$RUN" -eq "1" ]];
     fi
   #
   NLINES=`wc -l $READS | awk '{ print $1; }'`;
-  echo "scale=2; ((($NLINES/4) * l($NLINES/4)/l(10)) - (($NLINES/4) * 1.442695))/8" \
+  echo "scale=0; ((($NLINES/4) * l($NLINES/4)/l(10)) - (($NLINES/4) * 1.442695))/8" \
   | bc -l > report_permutations.txt
   cat report_permutations.txt
   # 
