@@ -12,7 +12,7 @@ for(( x = 100 ; x <= 1000 ; x += 100 ));
   ./Simulate.sh $DB $x 50
   #
   ./MizaR.sh --reads merged_reads.fq \
-  --database $DB --cache $CACHE \
+  --database $DB --cache $CACHE --sim-reads 0.5 \
   --fqzcomp --lzma --jarvis --threads 8 \
   --similarity 50 --output compressed.mr
   #
@@ -51,7 +51,7 @@ for(( x = 1 ; x <= 100 ; x += 10 ));
   ./Simulate.sh $DB 500 $x
   #
   ./MizaR.sh --reads merged_reads.fq \
-  --database $DB --cache $CACHE \
+  --database $DB --cache $CACHE --sim-reads 0.5 \
   --fqzcomp --lzma --jarvis --threads 8 \
   --similarity 50 --output compressed.mr
   #
