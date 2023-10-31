@@ -3,9 +3,15 @@
 
 ### Installation ###
 
-Prepare data and install tools:
+If required, install art and cmake tools:
 ```
-apt-get install art-nextgen-simulation-tools
+sudo apt-get install art-nextgen-simulation-tools
+sudo apt-get install cmake
+```
+Then, install MizaR:
+```
+git clone https://github.com/cobilab/mizar
+cd mizar/
 chmod +x *.sh
 ./MizaR.sh --install
 lzma -d VDB_MT_ALL_REF.fa.lzma
