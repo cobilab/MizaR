@@ -36,7 +36,7 @@ The info menu contains the following information
                                                           
                         MizaR                             
                                                           
-  Metagenomic information zone arrangement Encoder V1.0   
+ Metagenomic information zone arrangement Encoder V1.0    
                                                           
  Program options ---------------------------------------- 
                                                           
@@ -44,10 +44,15 @@ The info menu contains the following information
  -i, --install                   Installation,            
                                                           
  -s <INT>, --similarity <INT>    Minimum similarity,      
+ -y <DBL>, --sim-reads <DBL>     Reads similarity,        
  -c <INT>, --cache <INT>         Cache memory (max),      
                                  creating buckets,        
  -t <INT>, --threads <INT>       Number of threads,       
  -o <STR>, --output <STR>        Output file name,        
+                                                          
+ -f, --fqzcomp                   Run Fqzcomp compressor,  
+ -l, --lzma                      Run lzma compressor,     
+ -j, --jarvis                    Run JARVIS compressor,   
                                                           
  -r <STR>, --reads <STR>         FASTQ reads (input),     
  -d <STR>, --database <STR>      FASTA Viral Database.    
@@ -55,8 +60,8 @@ The info menu contains the following information
  Example -----------------------------------------------  
                                                           
  ./MizaR.sh --reads reads.fq --database VDB.mfa \        
-   --output compressed_reads.fq.mr --threads 8            
-                                                          
+ --output compressed_reads.fq.mr --fqzcomp --threads 8
+ 
  -------------------------------------------------------
 ```
 
@@ -65,6 +70,11 @@ The info menu contains the following information
 To run coverage and sequences experiments:
 ```
 ./RunAll.sh 1> report-stdout.txt 2> report-stderr.txt &
+```
+To run the respective plots:
+```
+./Plot_sequences.sh
+./Plot_coverage.sh
 ```
 
 ### Internal programs ###
@@ -75,6 +85,8 @@ FALCON
 MAGNET
 GTO
 FQZCOMP
+JARVIS3
+LZMA
 ```
 
 ### Citation ###
