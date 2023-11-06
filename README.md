@@ -1,5 +1,6 @@
 # MizaR
-#
+
+A sorting method for encoding metagenomic data 
 
 ### Installation ###
 
