@@ -6,7 +6,7 @@ A sorting method for encoding metagenomic data
 
 If required, install art and cmake tools:
 ```
-sudo apt-get install art-nextgen-simulation-tools
+sudo apt-get install art-nextgen-simulation-tools # for RunAll.sh
 sudo apt-get install cmake
 ```
 Then, install MizaR:
