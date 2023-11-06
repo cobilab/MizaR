@@ -74,7 +74,7 @@ The info menu contains the following information
 
 ### Experiments ###
 
-To run coverage and sequences experiments:
+To run the analysis of increasing the coverage and number of sequences sequences:
 ```
 ./RunAll.sh 1> report-stdout.txt 2> report-stderr.txt &
 ```
