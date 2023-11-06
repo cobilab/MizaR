@@ -31,7 +31,6 @@ gnuplot << EOF
     set style line 12 lc rgb '#190040'  pt 8 lw 2 ps 0.6  # circle
     set style line 13 lc rgb '#CC6600'  pt 9 lw 2 ps 0.6  # circle
     set style line 14 lc rgb '#7C2961'  pt 10 lw 2 ps 0.6  # circle
-    
     set grid
     set ylabel "Gain Megabytes (Original - Sorted)"
     set xlabel "Number of reference sequences"

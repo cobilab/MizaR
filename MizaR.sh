@@ -274,7 +274,7 @@ if [[ "$RUN" -eq "1" ]];
         #
         # GET GID AND SEQUENCE...
         GID=`echo $NAME | sed -e 's/NC_//g' | tr '_' '\t' | awk '{ print $1}'`;
-        gto_fasta_extract_read_by_pattern -p "$GID" < $DATABASE > mizar-ref.fa;
+        ./gto_fasta_extract_read_by_pattern -p "$GID" < $DATABASE > mizar-ref.fa;
         #
         FSIZE=`ls -la mizar-tmp-reads.fq | awk '{ print $5; }'`;
         #
