@@ -3,7 +3,7 @@
 gnuplot << EOF
     reset
     set terminal pdfcairo enhanced color font 'Verdade,12'
-    set output "Coverage.pdf"
+    set output "Channels.pdf"
     set style line 101 lc rgb '#000000' lt 1 lw 2
     set border 3 front ls 101
     set tics nomirror out scale 0.75
@@ -33,13 +33,8 @@ gnuplot << EOF
     set style line 14 lc rgb '#7C2961'  pt 10 lw 2 ps 0.6  # circle
     set grid
     set ylabel "Gain Megabytes (Original - Sorted)"
-    set xlabel "Sequencing depth coverage"
-    plot 'coverage.txt' u 1:(\$10-\$11) w lp ls 1 title 'FQZ', 'coverage.txt' u 1:(\$10-\$12) w lp ls 2 title 'FQZ+order', 'coverage.txt' u 1:(\$13-\$14) w lp ls 4 title 'LZMA', 'coverage.txt' u 1:(\$13-\$15) w lp ls 6 title 'LZMA+order', 'coverage.txt' u 1:(\$16-\$17) w lp ls 5 title 'JARVIS', 'coverage.txt' u 1:(\$16-\$18) w lp ls 7 title 'JARVIS+order'
-    #plot 'coverage.txt' u 1:(\$9-\$10) w lp ls 1 title 'All', 'coverage.txt' u 1:(\$9-\$11) w lp ls 2 title 'All preserving order', 'coverage.txt' u 1:(\$2-\$5) w lp ls 4 title 'headers', 'coverage.txt' u 1:(\$3-\$6) w lp ls 5 title 'DNA bases', 'coverage.txt' u 1:(\$4-\$7) w lp ls 6 title 'quality-scores'
-    #plot 'coverage.txt' u 1:(\$9-\$10) w lp ls 1 title 'original-MizaR', 'coverage.txt' u 1:(\$9-\$11) w lp ls 2 title 'original-(MizaR+order)'
-    #plot 'coverage.txt' u 1:(\$3-\$6) w lp ls 1 title 'original-MizaR bases'
-    #plot 'coverage.txt' u 1:3 w lp ls 1 title 'bases original', 'coverage.txt' u 1:6 w lp ls 2 title 'bases mizar'
-    #plot 'coverage.txt' u 1:9 w lp ls 1 title 'original', 'coverage.txt' u 1:10 w lp ls 4 title 'mizar', 'coverage.txt' u 1:11 w lp ls 5 title 'mizar + order'
+    set xlabel "Number of reference sequences"
+    plot 'sequences.txt' u 1:(\$3-\$6) w lp ls 12 title 'headers', 'sequences.txt' u 1:(\$4-\$7) w lp ls 13 title 'DNA bases', 'sequences.txt' u 1:(\$5-\$8) w lp ls 14 title 'quality-scores'
 EOF
 #
-evince Coverage.pdf &
+evince Sequences.pdf &

@@ -34,8 +34,8 @@ gnuplot << EOF
     set grid
     set ylabel "Gain Megabytes (Original - Sorted)"
     set xlabel "Number of reference sequences"
-    plot 'sequences.txt' u 1:(\$10-\$11) w lp ls 1 title 'FQZ', 'sequences.txt' u 1:(\$10-\$12) w lp ls 2 title 'FQZ+order', 'sequences.txt' u 1:(\$13-\$14) w lp ls 4 title 'LZMA', 'sequences.txt' u 1:(\$13-\$15) w lp ls 6 title 'LZMA+order', 'sequences.txt' u 1:(\$16-\$17) w lp ls 5 title 'Jarvis', 'sequences.txt' u 1:(\$16-\$18) w lp ls 7 title 'JARVIS+order'
-    plot 'sequences.txt' u 1:(\$3-\$6) w lp ls 12 title 'headers', 'sequences.txt' u 1:(\$4-\$7) w lp ls 13 title 'DNA bases', 'sequences.txt' u 1:(\$5-\$8) w lp ls 14 title 'quality-scores'
+    plot 'sequences.txt' u 1:(\$10-\$11) w lp ls 1 title 'FQZ', 'sequences.txt' u 1:(\$10-\$12) w lp ls 2 title 'FQZ+order', 'sequences.txt' u 1:(\$13-\$14) w lp ls 4 title 'LZMA', 'sequences.txt' u 1:(\$13-\$15) w lp ls 6 title 'LZMA+order', 'sequences.txt' u 1:(\$16-\$17) w lp ls 5 title 'JARVIS', 'sequences.txt' u 1:(\$16-\$18) w lp ls 7 title 'JARVIS+order'
+    #plot 'sequences.txt' u 1:(\$3-\$6) w lp ls 12 title 'headers', 'sequences.txt' u 1:(\$4-\$7) w lp ls 13 title 'DNA bases', 'sequences.txt' u 1:(\$5-\$8) w lp ls 14 title 'quality-scores'
 EOF
 #
 evince Sequences.pdf &
