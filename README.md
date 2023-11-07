@@ -74,13 +74,14 @@ The info menu contains the following information
 
 ### Experiments ###
 
-To run the analysis of increasing the coverage and number of sequences sequences:
+To run the analysis of increasing the number of reference sequences and coverage:
 ```
 ./RunAll.sh 1> report-stdout.txt 2> report-stderr.txt &
 ```
 To run the respective plots:
 ```
 ./Plot_sequences.sh
+./Plot_channels.sh
 ./Plot_coverage.sh
 ```
 
